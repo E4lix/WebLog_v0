@@ -16,3 +16,5 @@ Il utilise une base de données MySQL pour stocker les utilisateurs et les posts
 - Messages d’erreurs et de confirmation affichés dynamiquement
 
 ---
+
+Pour lancer le site localement : php -S localhost:8000 -t weblog_V0-master
