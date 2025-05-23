@@ -1,5 +1,3 @@
-<?php include('config.php'); ?>
-
 <?php
 if (isset($_POST['login_btn'])) {
     $username = trim($_POST['username'] ?? '');
@@ -24,23 +22,24 @@ if (isset($_POST['login_btn'])) {
                 $_SESSION['user'] = [
                     'id' => $user['id'],
                     'username' => $user['username'],
+                    'role' => $user['role'],
                 ];
                 $_SESSION['message'] = "Connexion réussie !";
                 header('Location: index.php');
-                exit();
+                exit;
             } else {
                 $_SESSION['message'] = "Mot de passe incorrect.";
-                header('Location: index.php');
+                header('Location: login.php');
                 exit();
             }
         } else {
             $_SESSION['message'] = "Nom d'utilisateur non trouvé.";
-            header('Location: index.php');
+            header('Location: login.php');
             exit();
         }
     } else {
         $_SESSION['message'] = "Erreur de connexion à la base de données.";
-        header('Location: index.php');
+        header('Location: login.php');
         exit();
     }
 }

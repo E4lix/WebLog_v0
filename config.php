@@ -1,11 +1,12 @@
 <?php
-//Create session per user:
-session_start();
+// Create session per user, if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
 define('DB_PORT', '3306');
-
 
 define('DB_NAME', 'WebLog');
 define('DB_USER', 'weblog_user');

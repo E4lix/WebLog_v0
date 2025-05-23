@@ -29,11 +29,7 @@
 				</p>
 			</form>
 		</div>
-
-
-	</div>
-	<!-- // content -->
-
+		
 	</div>
 	<!-- // container -->
 

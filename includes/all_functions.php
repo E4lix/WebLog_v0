@@ -1,4 +1,3 @@
-<?php include('config.php'); ?>
 <?php include('includes/public/head_section.php'); ?>
 
 <?php
