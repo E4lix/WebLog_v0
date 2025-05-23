@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 
 <?php $posts = getPublishedPosts($conn); ?>
 
-<title>Mon Blog | Home </title>
+<title>Mon Blog | Accueil</title>
 
 </head>
 

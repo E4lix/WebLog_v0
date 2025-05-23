@@ -2,7 +2,6 @@
 <html>
 <head>
 
-
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre|Noto+Serif|Tangerine" rel="stylesheet">
 
