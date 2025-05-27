@@ -1,11 +1,15 @@
+<!-- Vérification de la session utilisateur, si connecté, on affiche un message et un bouton logout -->
 <?php if (isset($_SESSION['user']['username'])) { ?>
 	<div class="logged_in_info">
 		<span><h1>Welcome <?php echo $_SESSION['user']['username'] ?></h1></span>
 		|
 		<span><a href="logout.php">Log out</a></span>
 	</div>
+
+<!-- Sinon, on affiche une bannière formaté -->
 <?php } else { ?>
 	<div class="banner">
+		<!-- Message d'accueil de la bannière -->
 		<div class="welcome_msg">
 			<h1>Today's Inspiration</h1>
 			<p>
@@ -17,6 +21,7 @@
 			<a href="register.php" class="btn">Register now!</a>
 		</div>
 
+		<!-- Encadré pour permettre à l'utilisateur de se connecter -->
 		<div class="login_div">
 			<form action="<?php echo BASE_URL . 'index.php'; ?>" method="post">
 				<h2>Login</h2>
