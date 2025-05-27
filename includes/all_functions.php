@@ -1,4 +1,5 @@
-<?php include('includes/public/head_section.php'); ?>
+<?php include_once(ROOT_PATH . '/config.php'); ?>
+<?php include_once(ROOT_PATH . '/includes/public/head_section.php'); ?>
 
 <?php
 function getPublishedPosts($conn) {
@@ -24,5 +25,14 @@ function getPostBySlug($conn, $slug) {
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc();
+}
+
+function getUsernameById($conn, $user_id) {
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    return $user ? $user['username'] : 'Utilisateur inconnu';
 }
 ?>

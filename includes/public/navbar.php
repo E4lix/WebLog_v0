@@ -3,8 +3,8 @@
 		<h1>Mon site web</h1>
 	</div>
 	<ul>
-	  <li><a class="active" href="../../index.php">Home</a></li>
-	  <li><a class="active" href="/includes/public/news.php">News</a></li>
+	  <li><a class="active" href="index.php">Home</a></li>
+	  <li><a class="active" href="news.php">News</a></li>
 	  <li><a class="active" href="#contact">Contact</a></li>
 	  <li><a class="active" href="#about">About</a></li>
 
