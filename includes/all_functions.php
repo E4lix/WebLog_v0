@@ -1,5 +1,4 @@
 <?php include_once(ROOT_PATH . '/config.php'); ?>
-<?php include_once(ROOT_PATH . '/includes/public/head_section.php'); ?>
 
 <?php
 function getPublishedPosts($conn) {
