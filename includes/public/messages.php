@@ -1,3 +1,4 @@
+<!-- Fonction qui test si un message est enregistré dans la session et l'affiche si c'est le cas -->
 <?php if (isset($_SESSION['message'])) : ?>
       <div class="message" >
       	<p>
