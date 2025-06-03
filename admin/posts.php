@@ -28,6 +28,7 @@ $posts = getAllPosts($conn); // Fonction à implémenter pour récupérer les po
 
 // Création d'un post
 if (isset($_POST['create_post'])) {
+    //trim() retire les espaces inutiles en début/fin de chaîne.
     $title = trim($_POST['title']);
     $slug = trim($_POST['slug']);
     $body = trim($_POST['body']);
@@ -50,7 +51,7 @@ if (isset($_POST['create_post'])) {
 // Édition d'un post
 if (isset($_GET['edit-post'])) {
     $post_id = $_GET['edit-post'];
-    $post = getPostById($conn, $post_id); // À implémenter
+    $post = getPostById($conn, $post_id);
     if ($post) {
         $title = $post['title'];
         $slug = $post['slug'];
