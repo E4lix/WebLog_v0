@@ -15,7 +15,7 @@ error_reporting(E_ALL);
 
 // Vérification de la session utilisateur
 if (!isset($_SESSION['user'])) {
-    header('Location: login.php'); // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+    header('Location: ' . ROOT_PATH . 'login.php'); // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
     exit();
 }
 

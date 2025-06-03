@@ -9,7 +9,7 @@ define('DB_TYPE', 'mysql');
 // Définit l'hôte de la base de données (ici, 'localhost' signifie que la base de données est sur le même serveur)
 define('DB_HOST', 'localhost');
 // Définit le port utilisé pour se connecter à la base de données (3306 est le port par défaut pour MySQL)
-define('DB_PORT', '3306');
+define('DB_PORT', '8000');
 
 // Ajoute les informations nécessaires pour se connecter à la base de données
 define('DB_NAME', 'WebLog'); // Nom de la base de données
@@ -21,5 +21,5 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 // Définit quelques constantes supplémentaires :
 define('ROOT_PATH', realpath(dirname(__FILE__))); // Définit le chemin absolu du dossier contenant ce fichier
-define('BASE_URL', 'http://localhost:8000'); // Définit l'URL de base du site web
+define('BASE_URL', 'http://localhost:8000/'); // Définit l'URL de base du site web
 ?>
