@@ -1,5 +1,4 @@
 <?php include_once(ROOT_PATH . '/config.php'); ?>
-<?php include_once(ROOT_PATH . '/includes/public/head_section.php'); ?>
 
 <?php
 // Fonction qui renvoie le nombre d'utilisateurs inscrits dans la BDD
@@ -39,15 +38,20 @@ function getNumberOfComments($conn): int {
     }
 }
 
-   function createUser ($username, $email, $password, $role_name) {
-       global $conn;
-       $sql = "INSERT INTO users (username, email, password, role_name) VALUES (?, ?, ?, ?)";
-       $stmt = $conn->prepare($sql);
-       $stmt->bind_param("sssi", $username, $email, $password, $role_name);
-       return $stmt->execute();
-   }
-   
+function createUser($username, $email, $password, $role_name) {
+    global $conn;
 
+    $sql = "INSERT INTO users (username, email, role, password) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Erreur prepare: " . $conn->error);
+    }
+
+    $stmt->bind_param("ssss", $username, $email, $role_name, $password);
+    return $stmt->execute();
+}
+
+   
 
 function getUserById($admin_id) {
     global $conn;
@@ -57,14 +61,19 @@ function getUserById($admin_id) {
     return $stmt->get_result()->fetch_assoc();
 }
 
-function updateUser ($admin_id, $username, $email, $password, $role_id) {
+function updateUser($admin_id, $username, $email, $password, $role_name) {
     global $conn;
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT); // Hachage du mot de passe
-    $sql = "UPDATE users SET username = ?, email = ?, password = ?, role_id = ? WHERE id = ?";
+
+    $sql = "UPDATE users SET username = ?, email = ?, password = ?, role = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssii", $username, $email, $passwordHash, $role_id, $admin_id);
+    if (!$stmt) {
+        die("Erreur prepare (update): " . $conn->error);
+    }
+
+    $stmt->bind_param("ssssi", $username, $email, $password, $role_name, $admin_id);
     return $stmt->execute();
 }
+
 
 function deleteUser ($admin_id) {
     global $conn;

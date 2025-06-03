@@ -3,6 +3,16 @@ include('../config.php');
 include(ROOT_PATH . '/includes/admin_functions.php'); 
 include(ROOT_PATH . '/includes/admin/head_section.php'); 
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+}
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Vérification de la session utilisateur
 if (!isset($_SESSION['user'])) {
     header('Location: login.php'); // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
@@ -89,10 +99,8 @@ if (isset($_GET['delete-admin'])) {
 $admins = getAllUsers(); // Fonction pour obtenir tous les utilisateurs
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
     <title>Admin | Manage users</title>
+
 </head>
 <body>
     <!-- En-tête de la page admin -->
@@ -144,7 +152,7 @@ $admins = getAllUsers(); // Fonction pour obtenir tous les utilisateurs
                 <select name="role_name" required>
                     <option value="" selected disabled>Assign role</option>
                     <?php foreach ($roles as $role) : ?>
-                        <option value="<?php echo $role['id']; ?>" <?php echo ($role['id'] == $role_name) ? 'selected' : ''; ?>>
+                        <option value="<?php echo $role['name']; ?>" <?php echo ($role['name'] == $role_name) ? 'selected' : ''; ?>>
                             <?php echo $role['name']; ?>
                         </option>
                     <?php endforeach; ?>
@@ -201,5 +209,7 @@ $admins = getAllUsers(); // Fonction pour obtenir tous les utilisateurs
         <!-- // Display records from DB -->
 
     </div>
-</body>
-</html>
+
+<!-- Footer -->
+<?php include(ROOT_PATH . '/includes/public/footer.php'); ?>
+<!-- // Footer -->
