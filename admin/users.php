@@ -19,6 +19,13 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
+// Vérifie si l'utilisateur connecté est bien un admin
+if ($_SESSION['user']['role'] !== 'Admin') {
+    $_SESSION['message'] = "Accès refusé. Vous devez être administrateur pour accéder à cette page.";
+    header('Location: ' . BASE_URL . 'index.php');
+    exit();
+}
+
 // Initialisation des variables
 $username = "";
 $email = "";

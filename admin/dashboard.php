@@ -6,6 +6,21 @@
 <title>Admin | Dashboard</title> <!-- Titre de la page -->
 </head>
 
+<?php
+// Vérification de la session utilisateur
+if (!isset($_SESSION['user'])) {
+    header('Location: ' . ROOT_PATH . 'login.php'); // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+    exit();
+}
+
+// Vérifie si l'utilisateur connecté est bien un admin
+if ($_SESSION['user']['role'] !== 'Admin') {
+    $_SESSION['message'] = "Accès refusé. Vous devez être administrateur pour accéder à cette page.";
+    header('Location: ' . BASE_URL . 'index.php');
+    exit();
+}
+?>
+
 <body>
     <!-- En-tête de la page admin -->
     <div class="header">
