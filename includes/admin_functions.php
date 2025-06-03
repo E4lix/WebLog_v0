@@ -38,4 +38,62 @@ function getNumberOfComments($conn): int {
         return 0;
     }
 }
+
+   function createUser ($username, $email, $password, $role_name) {
+       global $conn;
+       $sql = "INSERT INTO users (username, email, password, role_name) VALUES (?, ?, ?, ?)";
+       $stmt = $conn->prepare($sql);
+       $stmt->bind_param("sssi", $username, $email, $password, $role_name);
+       return $stmt->execute();
+   }
+   
+
+
+function getUserById($admin_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->bind_param("i", $admin_id);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_assoc();
+}
+
+function updateUser ($admin_id, $username, $email, $password, $role_id) {
+    global $conn;
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT); // Hachage du mot de passe
+    $sql = "UPDATE users SET username = ?, email = ?, password = ?, role_id = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssii", $username, $email, $passwordHash, $role_id, $admin_id);
+    return $stmt->execute();
+}
+
+function deleteUser ($admin_id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
+    $stmt->bind_param("i", $admin_id);
+    return $stmt->execute();
+}
+
+function getAllUsers() {
+    global $conn;
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($conn, $sql);
+    $users = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $users[] = $row;
+    }
+    return $users;
+}
+
+function getRoles($conn) {
+    $sql = "SELECT * FROM roles";
+    $result = mysqli_query($conn, $sql);
+    $roles = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $roles[] = $row;
+    }
+
+    return $roles;
+}
+
 ?>

@@ -17,4 +17,4 @@ Il utilise une base de données MySQL pour stocker les utilisateurs et les posts
 
 ---
 
-Pour lancer le site localement : php -S localhost:8000 -t weblog_V0-master
+Pour lancer le site localement : php -S localhost:8000 -t WebLog_v0
