@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 
 // Vérification de la session utilisateur
 if (!isset($_SESSION['user'])) {
-    header('Location: ' . ROOT_PATH . 'login.php');
+    header('Location: ' . ROOT_PATH . '/login.php');
     exit();
 }
 
@@ -31,6 +31,7 @@ if (isset($_POST['create_post'])) {
     $title = trim($_POST['title']);
     $slug = trim($_POST['slug']);
     $body = trim($_POST['body']);
+    $image = isset($_POST['image']) ? trim($_POST['image']) : '';
     $published = isset($_POST['published']) ? 1 : 0;
     $user_id = $_SESSION['user']['id'];
 
@@ -40,7 +41,7 @@ if (isset($_POST['create_post'])) {
         exit();
     }
 
-    createPost($user_id, $title, $slug, $body, $published); // À implémenter
+    createPost($conn, $user_id, $title, $slug, $body, $image,$published); // À implémenter
     $_SESSION['message'] = "Post créé avec succès.";
     header('Location: posts.php');
     exit();
@@ -65,9 +66,10 @@ if (isset($_POST['update_post'])) {
     $title = trim($_POST['title']);
     $slug = trim($_POST['slug']);
     $body = trim($_POST['body']);
+    $image = isset($_POST['image']) ? trim($_POST['image']) : '';
     $published = isset($_POST['published']) ? 1 : 0;
 
-    updatePost($post_id, $title, $slug, $body, $published); // À implémenter
+    updatePost($conn, $post_id, $title, $slug, $body, $image, $published); // À implémenter
     $_SESSION['message'] = "Post mis à jour avec succès.";
     header('Location: posts.php');
     exit();
@@ -114,6 +116,21 @@ if (isset($_GET['delete-post'])) {
             <input type="text" name="title" value="<?php echo $title; ?>" placeholder="Title" required>
             <input type="text" name="slug" value="<?php echo $slug; ?>" placeholder="Slug" required>
             <textarea name="body" placeholder="Body" required><?php echo $body; ?></textarea>
+            <label for="image">Choisir une image</label>
+            <select name="image" id="image">
+                <option value="">-- Sélectionner une image --</option>
+                <?php
+                $image_dir = ROOT_PATH . '/static/images';
+                $image_url = BASE_URL . 'static/images/';
+                $files = array_diff(scandir($image_dir), ['.', '..']);
+
+                foreach ($files as $file) {
+                    $selected = ($image == $file) ? 'selected' : '';
+                    echo "<option value=\"$file\" $selected>$file</option>";
+                }
+                ?>
+            </select>
+
             <label>
                 <input type="checkbox" name="published" <?php echo ($published) ? 'checked' : ''; ?>> Publier
             </label>

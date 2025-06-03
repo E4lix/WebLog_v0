@@ -12,7 +12,7 @@ include(ROOT_PATH . '/admin/post_functions.php');
 include(ROOT_PATH . '/includes/admin/head_section.php'); 
 
 // Récupération de tous les sujets disponibles pour les posts
-$topics = getAllTopics(); // Fonction qui récupère tous les sujets de la base de données
+$topics = getAllTopics($conn); // Fonction qui récupère tous les sujets de la base de données
 
 ?>
 

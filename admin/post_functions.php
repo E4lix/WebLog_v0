@@ -53,5 +53,18 @@ function deletePost($conn, $id) {
     $sql = "DELETE FROM posts WHERE id = $id";
     return mysqli_query($conn, $sql);
 }
+
+function getAllTopics($conn) {
+    $sql = "SELECT id, name, slug FROM topics ORDER BY name ASC";
+    $result = mysqli_query($conn, $sql);
+
+    $topics = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $topics[] = $row;
+    }
+
+    return $topics;
+}
+
 ?>
 
